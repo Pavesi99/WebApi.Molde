@@ -1,15 +1,36 @@
+using Microsoft.EntityFrameworkCore;
+using WebApi.Molde.Application.Services;
+using WebApi.Molde.Domain.Interfaces.Application;
+using WebApi.Molde.Domain.Interfaces.Repository;
+using WebApi.Molde.Infra.Context;
+using WebApi.Molde.Infra.Repository;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//Injeção de serviços
+builder.Services.AddScoped<IWeatherForecastService, WeatherForecastService>();
+
+//Injeção de repositorios
+builder.Services.AddScoped<IWeatherForecastRepository, WeatherForecastRepository>();
+
+//Adicionando o banco de dados, nessa caso InMemory
+builder.Services.AddDbContext<WeatherForecastContext>(o =>
+{
+    o.UseInMemoryDatabase("WeatherForecastDataBase");
+});
+
+//Adiciona a rota para verificar se aplicação esta funcionando
+builder.Services.AddHealthChecks();
+
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -17,6 +38,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+//Adiciona a rota para verificar se aplicação esta funcionando
+app.UseHealthChecks("/healthy");
 
 app.UseAuthorization();
 

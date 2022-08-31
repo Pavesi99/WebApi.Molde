@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Molde.Api.Services;
+using WebApi.Molde.Domain.Interfaces.Application;
+using WebApi.Molde.Domain.Models;
 
 namespace WebApi.Molde.Api.Controllers
 {
@@ -11,19 +12,19 @@ namespace WebApi.Molde.Api.Controllers
 
         private readonly ILogger<WeatherForecastController> _logger;
 
-        private readonly WeatherForecastService _weatherForecastService;
+        private readonly IWeatherForecastService _weatherForecastService;
 
         // 2 - Injetar WeatherForecastService para buscar as informações
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, WeatherForecastService weatherForecastService)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IWeatherForecastService weatherForecastService)
         {
             _logger = logger;
             _weatherForecastService = weatherForecastService;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        public Task<IEnumerable<WeatherForecast>> Get()
         {
-            return _weatherForecastService.GetWeatherForecast();
+            return _weatherForecastService.GetWeatherForecastAsync();
         }
     }
 }

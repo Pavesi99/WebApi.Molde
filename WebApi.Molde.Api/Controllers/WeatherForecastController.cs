@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Molde.Domain.DTOs;
 using WebApi.Molde.Domain.Interfaces.Application;
 using WebApi.Molde.Domain.Models;
 
@@ -25,6 +26,12 @@ namespace WebApi.Molde.Api.Controllers
         public Task<IEnumerable<WeatherForecast>> Get()
         {
             return _weatherForecastService.GetWeatherForecastAsync();
+        }
+
+        [HttpPost(Name = "CreateWeatherForecast")]
+        public Task Create([FromBody] WeatherForecastDTO weatherForecastDTO)
+        {
+            return _weatherForecastService.CreateWeatherForecastAsync(weatherForecast);
         }
     }
 }

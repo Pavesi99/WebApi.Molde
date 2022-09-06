@@ -12,15 +12,18 @@ namespace WebApi.Molde.Infra.Repository
 {
     public class WeatherForecastRepository : IWeatherForecastRepository
     {
+        private readonly WeatherForecastContext _context;
         private readonly DbSet<WeatherForecast> _dbSet;
         public WeatherForecastRepository(WeatherForecastContext context)
         {
             _dbSet = context.WeatherForecast;
+            _context = context;
         }
 
         public async Task SaveWeatherForecastAsync(WeatherForecast weatherForecast)
         {
             await _dbSet.AddAsync(weatherForecast);
+            _context.SaveChanges();
         }
 
         public async Task<IEnumerable<WeatherForecast>> GetWeathersForecastAsync()

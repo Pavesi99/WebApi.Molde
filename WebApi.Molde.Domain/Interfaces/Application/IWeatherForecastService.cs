@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebApi.Molde.Domain.DTOs;
 using WebApi.Molde.Domain.Models;
 
 namespace WebApi.Molde.Domain.Interfaces.Application
@@ -10,5 +11,6 @@ namespace WebApi.Molde.Domain.Interfaces.Application
     public interface IWeatherForecastService
     {
         Task<IEnumerable<WeatherForecast>> GetWeatherForecastAsync();
+        Task CreateWeatherForecastAsync(WeatherForecastDTO weatherForecastDTO);
     }
 }

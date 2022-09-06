@@ -1,4 +1,5 @@
-﻿using WebApi.Molde.Domain.Interfaces.Application;
+﻿using WebApi.Molde.Domain.DTOs;
+using WebApi.Molde.Domain.Interfaces.Application;
 using WebApi.Molde.Domain.Interfaces.Repository;
 using WebApi.Molde.Domain.Models;
 
@@ -17,6 +18,12 @@ namespace WebApi.Molde.Application.Services
         public async Task<IEnumerable<WeatherForecast>> GetWeatherForecastAsync()
         {
             return await _weatherForecastRepository.GetWeathersForecastAsync();
+        }
+
+        public async Task CreateWeatherForecastAsync(WeatherForecastDTO weatherForecastDTO)
+        {
+            //Converter DTO para model
+            await  _weatherForecastRepository.SaveWeatherForecastAsync(weatherForecast);
         }
     }
 }

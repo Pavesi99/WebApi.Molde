@@ -31,7 +31,7 @@ namespace WebApi.Molde.Api.Controllers
         [HttpPost(Name = "CreateWeatherForecast")]
         public Task Create([FromBody] WeatherForecastDTO weatherForecastDTO)
         {
-            return _weatherForecastService.CreateWeatherForecastAsync(weatherForecast);
+            return _weatherForecastService.CreateWeatherForecastAsync(weatherForecastDTO);
         }
     }
 }

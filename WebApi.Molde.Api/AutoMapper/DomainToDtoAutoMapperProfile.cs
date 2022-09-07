@@ -4,9 +4,9 @@ using WebApi.Molde.Domain.Models;
 
 namespace WebApi.Molde.Api.AutoMapper
 {
-    public class DomainToDtoAutoMapper :Profile
+    public class DomainToDtoAutoMapperProfile :Profile
     {
-        public DomainToDtoAutoMapper()
+        public DomainToDtoAutoMapperProfile()
         {
             CreateMap<WeatherForecastDTO, WeatherForecast>();
         }

@@ -7,9 +7,8 @@ using WebApi.Molde.Domain.Models;
 
 namespace WebApi.Molde.Domain.Interfaces.Repository
 {
-    public interface IWeatherForecastRepository
+    public interface IWeatherForecastRepository : IGenericRepository<WeatherForecast>
     {
-        Task SaveWeatherForecastAsync(WeatherForecast weatherForecast);
-        Task<IEnumerable<WeatherForecast>> GetWeathersForecastAsync();
+       
     }
 }
